@@ -1,0 +1,2 @@
+PyMySQL==0.7.9
+jupyterhub>=0.5
