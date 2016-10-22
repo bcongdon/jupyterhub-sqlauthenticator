@@ -15,7 +15,7 @@ class SQLAuthenticator(Authenticator):
     @gen.coroutine
     def authenticate(self, handler, data):
         conn = pymysql.connect(host=os.getenv('MYSQL_HOST'),
-                               port=int(os.getenv('MYSQL_PORT')),
+                               port=int(os.getenv('MYSQL_PORT', 0)),
                                user=os.getenv('MYSQL_USER'),
                                password=os.getenv('MYSQL_PASS'),
                                db=os.getenv('MYSQL_DB'),
