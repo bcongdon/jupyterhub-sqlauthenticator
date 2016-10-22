@@ -1,2 +1,3 @@
+passlib==1.6.5
 PyMySQL==0.7.9
 jupyterhub>=0.5
