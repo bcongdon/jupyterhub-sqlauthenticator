@@ -7,12 +7,15 @@ import os
 
 class SQLAuthenticator(Authenticator):
     def _verify_password_hash(self, hash_, password):
-        return pbkdf2_sha256.verify(password, hash_)
+        try:
+            return pbkdf2_sha256.verify(password, hash_)
+        except ValueError:
+            return False
 
     @gen.coroutine
     def authenticate(self, handler, data):
         conn = pymysql.connect(host=os.getenv('MYSQL_HOST'),
-                               port=os.getenv('MYSQL_PORT'),
+                               port=int(os.getenv('MYSQL_PORT')),
                                user=os.getenv('MYSQL_USER'),
                                password=os.getenv('MYSQL_PASS'),
                                db=os.getenv('MYSQL_DB'),
@@ -21,7 +24,7 @@ class SQLAuthenticator(Authenticator):
 
         try:
             with conn.cursor() as cursor:
-                user = conn.excape(data['username'])
+                user = conn.escape(data['username'])
                 sql = 'SELECT `password` FROM `users` WHERE `username` = {}'
                 sql_formatted = sql.format(user)
 
