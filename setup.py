@@ -8,7 +8,7 @@ setup(name='sqlauthenticator',
       author='Benjamin Congdon',
       license='MIT',
       author_email='bcongdo2@illinois.edu',
-      url='https://github.com/bcongdon/adsa-jupyterhub-authenticator',
+      url='https://github.com/bcongdon/jupyterhub-sqlauthenticator',
       packages=['sqlauthenticator'],
       install_requires=[
         'passlib',
